@@ -1,0 +1,2 @@
+Some scripts that copy mysql databases or cisco switch configs into minio object storage.
+These are run via cron to back things up to minio from a central server.
