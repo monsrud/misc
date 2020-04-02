@@ -1,0 +1,19 @@
+system_ip: 10.90.1.7
+system_mask: 255.255.0.0
+system_gateway: 10.0.90.17
+system_mac: 70:88:6B:C6:05:80
+system_password: password
+system_username: username 
+system_model: K60i
+system_hardware_version: 10
+system_firmware_version: None
+system_boot_loader_version: None
+system_unit_name: KB-C6-05-80
+system_location: my device location 
+system_description: my device description 
+system_ssid: my_device_ssid
+system_role: hub
+system_radio_peers: 
+    - KB-C6-05-9C
+    - KB-C6-05-CC
+
