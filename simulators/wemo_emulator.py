@@ -30,7 +30,9 @@ import string
 This script can be used to emulate a Wemo outlet plug. I used a real outlet plug, Wireshark, and a LAN tap to
 watch SSDP traffic over the network. Then wrote this script to simulate these devices.
 This allowed us to test our system without actually having to have the Wemo device present. 
-Admittedly, it is not great code but functional.
+Admittedly, it is not great code but functional. This was based on the original code
+from MakerMusings fauxmo.py.
+
 """
 
 if not os.geteuid() == 0:
