@@ -1,0 +1,69 @@
+# standard yml for building a lab server
+
+---
+- hosts: centos
+  remote_user: root
+
+  tasks:
+
+  - name: install updates using yum
+    yum:
+      name: "*"
+      state: latest
+
+  - name: Install common packages
+    yum:
+      name: "{{ packages }}"
+    vars:
+      packages:
+      - cifs-utils
+      - curl
+      - device-mapper-multipath
+      - dosfstools
+      - iotop
+      - ipmitool
+      - iproute
+      - iprutils
+      - iputils
+      - iscsi-initiator-utils
+      - minicom
+      - net-tools
+      - nfs-utils
+      - parted
+      - rsync
+      - samba-client
+      - sg3_utils
+      - util-linux
+      - wget
+      - yum-utils
+
+  - name: Enable root login via ssh
+    command: sed -i "s/#PermitRootLogin yes/PermitRootLogin yes/" /etc/ssh/sshd_config
+
+  - name: Disable firewalld
+    service: name=firewalld state=stopped enabled=no
+
+  - name: Create ntp.conf
+    when: ansible_virtualization_role == "host"
+    local_action: copy content="server 132.163.96.5 driftfile /var/lib/ntp/drift" dest="/tmp/testfile"
+
+- name: Copy ntp.conf to host
+    when: ansible_virtualization_role == "host"
+    copy:
+      src: /tmp/testfile
+      dest: /etc/ntp.conf
+      owner: root
+      group: root
+      mode: 0644
+
+  - name: Install ntp
+    when: ansible_virtualization_role == "host"
+    yum:
+      name: ntp
+      state: latest
+
+  - name: Install open vm tools
+    when: ansible_virtualization_role == "guest"
+    yum:
+      name: open-vm-tools
+      state: latest
