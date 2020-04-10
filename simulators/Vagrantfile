@@ -1,0 +1,51 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+VM_NAME =        ENV['VM_NAME']        || "Hue Emulator"
+BULBS =          ENV['BULBS']     || 3
+BRIDGES =        ENV['BRIDGES']   || 1
+
+# Optionally, hard code your network interface
+#HOST_INTERFACE = ENV['HOST_INTERFACE'] || "en0: Wi-Fi (AirPort)"
+HOST_INTERFACE = ENV['HOST_INTERFACE'] || "en7: Thunderbolt Ethernet"
+
+MAC_ADDRESS = "001788510800"
+
+# Tested with Vagrant 2.0.0
+# and ruby 2.4.2p198
+
+Vagrant.configure("2") do |config|
+    (0...BRIDGES.to_i).each do |i|
+        config.vm.box = "ubuntu/trusty64"
+        config.vm.define "HueBridge_" + i.to_s do |cfg|
+            cfg.vm.provider :virtualbox do |vb|
+	        vb.name = VM_NAME + " " + i.to_s
+                vb.customize ["modifyvm", :id, "--nicpromisc2", "allow-all"]
+                mac_address = MAC_ADDRESS[0...10] + i.to_s(16).rjust(2, "0")
+                cfg.vm.network :public_network, bridge: HOST_INTERFACE, mac: mac_address, auto_config: false
+            end
+        end # end define
+
+        config.vm.provision "file", source: "./hue.py", destination: "~/hue.py"
+        config.vm.provision "shell", inline: <<-SHELL
+        apt-get update
+        apt-get install -y python-dev > /dev/null 2>&1
+        apt-get install -y python-pip > /dev/null 2>&1
+        apt-get install -y python3-requests > /dev/null 2>&1
+        apt-get install -y python3-netifaces > /dev/null 2>&1
+        apt-get install -y python3-psutil > /dev/null 2>&1
+        sysctl -w net.ipv4.ip_forward=1
+        echo "#!/bin/sh -e" > /etc/rc.local
+        echo "screen -dmS hue_simulator bash -c '/usr/bin/python3 /home/vagrant/hue.py --debug --vagrant --lights #{BULBS}'" >> /etc/rc.local
+        echo "ifconfig | grep eth1 -A 1 > /etc/issue" >> /etc/rc.local
+        echo "exit 0" >> /etc/rc.local  
+        echo "auto eth1" > /etc/network/interfaces.d/eth1.cfg
+        echo "iface eth1 inet dhcp" >> /etc/network/interfaces.d/eth1.cfg
+        shutdown -r now
+        SHELL
+   end # end bridges
+end # end vagrant configure
+
+
+
+
