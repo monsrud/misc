@@ -1,0 +1,20 @@
+
+Possibilities for commands to run...
+uptime
+date
+df
+ifconfig
+top
+uname -a
+route -n
+free
+cat /proc/meminfo
+cat /proc/cpuinfo
+cat /proc/loadavg
+
+API URL : http://localhost/monsrud1/monitor/1.0.0/ui/
+
+
+
+
+
