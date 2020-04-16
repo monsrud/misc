@@ -35,6 +35,8 @@ sudo docker build api/service/ -t $IMAGE_NAME
 # Run the Server
 sudo docker run -d  -p 80:8080 -e SWAGGER_JSON=/api/api.json -v ${PWD}/api:/api -v ${PWD}/tests:/tests --name ${CONTAINER_NAME} ${IMAGE_NAME}:latest 
 
+sudo docker exec -it ${CONTAINER_NAME} pytest -s /tests/
+
 echo "Test out the api here : http://localhost/practice/1.0.0/ui/"
 
 

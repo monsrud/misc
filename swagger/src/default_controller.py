@@ -19,7 +19,6 @@ def df_get():
                   'percent_used': parts[4]
             }      
             break
-
     return jsonify(result)
 
 def uptime_get():
@@ -71,8 +70,6 @@ def cpu_get():
         'cpu_cores': cpu_cores,
         'cpu_model': cpu_model
     }
-    #return result
-    #return json.dumps(result)
     return jsonify(result)
 
 def memory_get():
@@ -96,8 +93,6 @@ def memory_get():
         'free_memory': free_memory,
         'available_memory': available_memory
     }
-    #return result
-    #return json.dumps(result)
     return jsonify(result)
 
 
