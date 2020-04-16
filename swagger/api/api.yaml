@@ -1,11 +1,13 @@
 ---
 openapi: 3.0.0
 info:
-  description: Practice API for System Commands
-  version: 1.0.0-oas3
-  title: Practice API for System Commands
-  contact:
+  description: Practice API for Learning Swagger 
+  version: 1.0.0
+  title: Practice API for Learning Swagger 
+  contact: 
+    name: Marshall Onsrud
     email: marshall@theonsruds.com
+    url: https://www.linkedin.com/in/marshallonsrud/  
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
@@ -13,7 +15,7 @@ paths:
 
   "/uptime":
     get:
-      summary: Get the uptime for the system
+      description: Get the uptime for the system
       responses:
         '200':
           description: OK
@@ -27,7 +29,7 @@ paths:
 
   "/date":
     get:
-      summary: Get the date from the system
+      description: Get the date from the system
       responses:
         '200':
           description: OK
@@ -41,7 +43,7 @@ paths:
 
   "/uname":
     get:
-      summary: Get the uname from the system
+      description: Get the uname from the system
       responses:
         '200':
           description: OK
@@ -55,7 +57,7 @@ paths:
 
   "/memory":
     get:
-      summary: Get the memory utilization for the system in kB
+      description: Get the memory utilization for the system in kB
       responses:
         '200':
           description: OK
@@ -66,35 +68,13 @@ paths:
                 properties:
                   total_memory:
                     type: integer
-                  used_memory:
+                  available_memory:
                     type: integer
                   free_memory:
                     type: integer
   "/df":
     get:
-      summary: Get the disk utilization for the system
-      responses:
-        '200':
-          description: An array of objects
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    device:
-                      type: string
-                    space_used:
-                      type: integer
-                    space_available:
-                      type: integer
-                    percent_used:
-                      type: string
-
-  "/cpu":
-    get:
-      summary: Get the cpu information for the system
+      description: Get the disk utilization for the system
       responses:
         '200':
           description: OK
@@ -103,14 +83,33 @@ paths:
               schema:
                 type: object
                 properties:
-                  model_name:
+                  device:
+                    type: string
+                  space_used:
+                    type: integer 
+                  space_available:
+                    type: integer 
+                  percent_used:
+                    type: string
+
+  "/cpu":
+    get:
+      description: Get the cpu information for the system
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  cpu_model:
                     type: string
                   cpu_mhz:
                     type: float
                   cpu_cores:
                     type: integer
 
-
 servers:
-- url: http://127.0.0.1:8080/monitor/1.0.0
+- url: http://127.0.0.1:8080/practice/1.0.0
 
