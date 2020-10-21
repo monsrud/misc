@@ -1,0 +1,146 @@
+openapi: 3.0.0
+info:
+  contact:
+    email: marshall@theonsruds.com
+    name: Marshall Onsrud
+    url: https://www.linkedin.com/in/marshallonsrud/
+  description: Practice API for Learning Swagger
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  title: Practice API for Learning Swagger
+  version: 1.0.0
+servers:
+- url: http://127.0.0.1:8080/practice/1.0.0
+paths:
+  /cpu:
+    get:
+      description: Get the cpu information for the system
+      operationId: cpu_get
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_5'
+          description: OK
+      x-openapi-router-controller: openapi_server.controllers.default_controller
+  /date:
+    get:
+      description: Get the date from the system
+      operationId: date_get
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_1'
+          description: OK
+      x-openapi-router-controller: openapi_server.controllers.default_controller
+  /df:
+    get:
+      description: Get the disk utilization for the system
+      operationId: df_get
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_4'
+          description: OK
+      x-openapi-router-controller: openapi_server.controllers.default_controller
+  /memory:
+    get:
+      description: Get the memory utilization for the system in kB
+      operationId: memory_get
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_3'
+          description: OK
+      x-openapi-router-controller: openapi_server.controllers.default_controller
+  /uname:
+    get:
+      description: Get the uname from the system
+      operationId: uname_get
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_2'
+          description: OK
+      x-openapi-router-controller: openapi_server.controllers.default_controller
+  /uptime:
+    get:
+      description: Get the uptime for the system
+      operationId: uptime_get
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+          description: OK
+      x-openapi-router-controller: openapi_server.controllers.default_controller
+components:
+  schemas:
+    inline_response_200_5:
+      example:
+        cpu_model: cpu_model
+        cpu_cores: 0
+        cpu_mhz: ""
+      properties:
+        cpu_model:
+          type: string
+        cpu_mhz:
+          type: float
+        cpu_cores:
+          type: integer
+    inline_response_200_1:
+      example:
+        date: date
+      properties:
+        date:
+          type: string
+    inline_response_200:
+      example:
+        uptime: uptime
+      properties:
+        uptime:
+          type: string
+    inline_response_200_2:
+      example:
+        uname: uname
+      properties:
+        uname:
+          type: string
+    inline_response_200_3:
+      example:
+        total_memory: 0
+        free_memory: 1
+        available_memory: 6
+      properties:
+        total_memory:
+          type: integer
+        available_memory:
+          type: integer
+        free_memory:
+          type: integer
+    inline_response_200_4:
+      example:
+        percent_used: percent_used
+        space_used: 0
+        device: device
+        space_available: 6
+      properties:
+        device:
+          type: string
+        space_used:
+          type: integer
+        space_available:
+          type: integer
+        percent_used:
+          type: string

@@ -15,7 +15,6 @@ $| = 1;
 #
 # tool to spoof a server running WMSIISLOG.DLL and get log posts from windows media player
 #
-
 #
 # create an asx file that points to the content you want
 # make sure the logurl is http://127.0.0.1:8003

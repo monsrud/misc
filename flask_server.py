@@ -61,7 +61,6 @@ relays_defaults = dict([
     (8, 'off')
 ])
 
-
 app = Flask(__name__)
 
 @app.route('/on/<int:relay>')
