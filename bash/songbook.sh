@@ -13,6 +13,8 @@ rm -f /tmp/data
 #lowriter --headless --convert-to pdf *.docx
 #lowriter --headless --convert-to pdf *.doc
 
+# chordpro --generate=PDF --output=filename.pdf --no-csv filename.pro
+
 tempdata="/tmp/data"
 
 pagenumber=1
