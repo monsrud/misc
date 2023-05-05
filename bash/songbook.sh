@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Make a songbook pdf out of doc and docx files and/or any pdf files in a directory
+# Make an indexed songbook pdf out of doc/docx/chordrpo files and/or any pdf files in a directory too.
 
 # requires lowriter ; apt install libreoffice-writer 
 # requires pdftk ;  apt install pdftk
@@ -12,6 +12,10 @@ rm -f /tmp/data
 
 #lowriter --headless --convert-to pdf *.docx
 #lowriter --headless --convert-to pdf *.doc
+#for i in *.pro; do
+#    chordpro --generate=PDF --no-csv $i
+#done
+
 
 # chordpro --generate=PDF --output=filename.pdf --no-csv filename.pro
 
