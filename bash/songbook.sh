@@ -5,7 +5,11 @@
 # requires lowriter ; apt install libreoffice-writer 
 # requires pdftk ;  apt install pdftk
 # requires pdfinfo ;  apt install poppler-utils
-# apt install libreoffice-writer pdftk poppler-utils
+# requres libwx-perl; apt install libwx-perl
+# sudo apt install libreoffice-writer pdftk poppler-utils libwx-perl
+
+# requres chordpro
+# sudo cpan install chordpro
 
 rm -f 000_SongBook.pdf
 rm -f /tmp/data
