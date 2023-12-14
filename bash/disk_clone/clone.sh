@@ -2,7 +2,9 @@
 
 mount /dev/sda2 /mnt
 sleep 2
-rm -f /etc/cloud/cloud.cfg.d/*.cfg
+rm -f /mnt/etc/cloud/cloud.cfg.d/*.cfg
+rm -f /mnt/etc/cloud/*.cfg
+rm -f /mnt/etc/cloud/templates/*
 rm -Rf /mnt/var/lib/cloud/*
 cp 10-cloud.cfg /mnt/etc/cloud/cloud.cfg.d/
 cp 05_logging.cfg /mnt/etc/cloud/cloud.cfg.d/
