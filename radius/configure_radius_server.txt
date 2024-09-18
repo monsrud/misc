@@ -1,0 +1,5 @@
+apt install freeradius
+
+copy the clients.conf and users file to /etc/freeradius/3.0
+systemctl enable freeradius
+systemctl start freeradius

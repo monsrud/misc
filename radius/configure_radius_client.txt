@@ -1,0 +1,27 @@
+sudo apt-get install libpam-radius-auth libpam0g-dev gcc
+# optionally installfreeradius-utils for testing
+# it provides the radtest command
+# radtest <username> <password> <radiusserverip> <port> <sharedsecret>
+# radtest testuser password localhost 1812 mysupersecret
+
+sudo vi /etc/ssh/sshd_config
+
+# change challengeresponse to yes
+ChallengeResponseAuthentication yes
+# Change usepam to yes
+UsePAM yes
+
+sudo vi /etc/pam.d/sshd
+ 
+# add the following line to the beginning of the file
+auth  sufficient   pam_radius_auth.so
+
+sudo vi /etc/pam_radius_auth.conf
+# configure the radius server ip/port
+#server[:port]    shared_secret    timeout(s)
+IP/FQDN           MySecret         60
+
+sudo mkdir /etc/raddb
+sudo cp /etc/pam_radius_auth.conf /etc/raddb/server
+
+systemctl restart ssh
