@@ -1,0 +1,26 @@
+[req]
+prompt             = no
+default_bits       = 4096
+x509_extensions    = v3_req
+req_extensions     = v3_req
+default_md         = sha256
+distinguished_name = req_distinguished_name
+
+# recommend changing these to your needs
+[req_distinguished_name]
+countryName                 = US
+stateOrProvinceName         = Minnesota
+localityName                = Minneapolis 
+organizationName            = Site1
+commonName                  = test-server
+
+[v3_req]
+basicConstraints = CA:FALSE
+keyUsage         = nonRepudiation, digitalSignature, keyEncipherment, keyAgreement
+extendedKeyUsage = critical, serverAuth
+subjectAltName = @alt_names
+
+# apply any DNS or IP SANs as needed
+[alt_names]
+DNS.1 = Site1 
+#IP.1 = * 

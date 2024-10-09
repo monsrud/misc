@@ -1,0 +1,21 @@
+[req]
+prompt             = no
+default_bits       = 2048
+x509_extensions    = v3_req
+req_extensions     = v3_req
+default_md         = sha256
+distinguished_name = req_distinguished_name
+
+# recommend changing these to your needs
+[req_distinguished_name]
+countryName                 = US
+stateOrProvinceName         = Minnesota
+localityName                = Minneapolis 
+organizationName            = Site1 
+commonName                  = Marshall Onsrud
+emailAddress                = monsrud@kwikbit.com
+
+[v3_req]
+basicConstraints = CA:FALSE
+keyUsage         = nonRepudiation, digitalSignature, keyEncipherment, keyAgreement
+extendedKeyUsage = critical, clientAuth

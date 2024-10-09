@@ -1,0 +1,7 @@
+
+Update all the .cnf files and set the distinguished name and other values.
+The make_certs.sh will generate client and server ssl certificates.
+Client certificates can be used for authentication to the server.
+
+
+
